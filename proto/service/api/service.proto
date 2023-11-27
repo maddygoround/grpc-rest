@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package twirp.example.haberdasher;
+import "google/api/annotations.proto";
+option go_package = "github.com/example/rpc/haberdasher";
+
+
+// Haberdasher service makes hats for clients.
+service Haberdasher {
+  // MakeHat produces a hat of mysterious, randomly-selected color!
+  rpc MakeHat(Size) returns (Hat) {
+    option(google.api.http) = {
+        post: "/v1/hats",
+        body: "*"
+    };
+  }
+}
+
+// Size of a Hat, in inches.
+message Size {
+  int32 inches = 1; // must be > 0
+}
+
+// A Hat is a piece of headwear made by a Haberdasher.
+message Hat {
+  int32 inches = 1;
+  string color = 2; // anything but "invisible"
+  string name = 3; // i.e. "bowler"
+}

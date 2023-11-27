@@ -1,0 +1,113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "service/api/service.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Haberdasher"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/hats": {
+      "post": {
+        "summary": "MakeHat produces a hat of mysterious, randomly-selected color!",
+        "operationId": "Haberdasher_MakeHat",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/haberdasherHat"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Size of a Hat, in inches.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/haberdasherSize"
+            }
+          }
+        ],
+        "tags": [
+          "Haberdasher"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "haberdasherHat": {
+      "type": "object",
+      "properties": {
+        "inches": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "color": {
+          "type": "string",
+          "title": "anything but \"invisible\""
+        },
+        "name": {
+          "type": "string",
+          "title": "i.e. \"bowler\""
+        }
+      },
+      "description": "A Hat is a piece of headwear made by a Haberdasher."
+    },
+    "haberdasherSize": {
+      "type": "object",
+      "properties": {
+        "inches": {
+          "type": "integer",
+          "format": "int32",
+          "title": "must be \u003e 0"
+        }
+      },
+      "description": "Size of a Hat, in inches."
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

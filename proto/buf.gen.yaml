@@ -1,0 +1,30 @@
+version: v1
+plugins:
+  - plugin: buf.build/grpc-ecosystem/openapiv2:v2.18.1
+    out: ../docs
+    opt:
+      - include_package_in_tags=false
+      - json_names_for_fields=true
+      - allow_delete_body=true
+      - use_go_templates=true
+      - allow_repeated_fields_in_body=true
+      - logtostderr=true
+      - allow_merge=true
+  - plugin: buf.build/grpc/go:v1.3.0
+    out: ./build/go
+    opt:
+      - paths=source_relative
+  - plugin: buf.build/protocolbuffers/go
+    out: ./build/go
+    opt:
+      - paths=source_relative
+  - plugin: buf.build/grpc-ecosystem/gateway:v2.18.1
+    out: ./build/go
+    opt:
+      - paths=source_relative
+      - allow_delete_body=true
+      - allow_repeated_fields_in_body=true
+  - out: ./build/ts
+    plugin: buf.build/community/stephenh-ts-proto:v1.164.0
+    opt: env=browser,outputServices=nice-grpc,outputServices=generic-definitions,esModuleInterop=true,useDate=string,outputJsonMethods=true,stringEnums=true,useExactTypes=false,useOptionals=none,unrecognizedEnum=false,addGrpcMetadata=true
+

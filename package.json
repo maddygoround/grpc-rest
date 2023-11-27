@@ -1,0 +1,24 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "cd proto && buf generate --debug"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nice-grpc": "^2.1.7",
+    "long": "^5.2.3",
+    "protobufjs": "^7.2.5",
+    "nice-grpc-common" : "^2.0.2",
+    "nice-grpc-server-reflection" : "^2.0.9",
+    "execa" : "^8.0.1"
+  },
+  "devDependencies": {
+    "grpc-tools": "^1.12.4",
+    "ts-proto": "^1.164.1"
+  }
+}
